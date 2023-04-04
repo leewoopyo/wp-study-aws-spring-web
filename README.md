@@ -5,12 +5,17 @@
 ## # 빌드 도구  : Gradle
 
 ## # 형상관리 도구  : Git, Github
-형상관리 정책은 git flow 를 따른다
+형상관리 정책은 git flow 를 따른다.
+
+하지만 개인 스터디이니만큼 master와 develop만 두기로 한다.
+
     ### 1. master
     ### 2. release
     ### 3. test
     ### 4. develop
+
 * [gitFlow 설명](https://gist.github.com/ihoneymon/a28138ee5309c73e94f9) 
+
 
 ## # profile
     ### 1. prod
