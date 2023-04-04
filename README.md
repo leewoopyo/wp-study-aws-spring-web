@@ -9,6 +9,10 @@
 
 하지만 개인 스터디이니만큼 master와 develop만 두기로 한다.
 
+개발 단위 별로, feature/{브랜치명} 으로 브랜치를 생성하고 
+
+
+
     ### 1. master
     ### 2. release
     ### 3. test
