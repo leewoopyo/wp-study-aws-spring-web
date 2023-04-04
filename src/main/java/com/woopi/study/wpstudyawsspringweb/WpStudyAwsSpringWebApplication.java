@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WpSdutyAwsSpringWebApplication {
+public class WpStudyAwsSpringWebApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WpSdutyAwsSpringWebApplication.class, args);
+		SpringApplication.run(WpStudyAwsSpringWebApplication.class, args);
 	}
 
 }
