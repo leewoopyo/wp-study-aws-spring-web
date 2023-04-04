@@ -9,7 +9,11 @@
 
 하지만 개인 스터디이니만큼 master와 develop만 두기로 한다.
 
-개발 단위 별로, feature/{브랜치명} 으로 브랜치를 생성하고 
+개발 단위 별로, master에서 feature/{브랜치명} 으로 브랜치를 생성하고
+
+작업 후엔 테스트를 위해 develop에 merge를 한다
+
+테스트 후엔 master에 Pull Request를 진행한다.
 
 
 
