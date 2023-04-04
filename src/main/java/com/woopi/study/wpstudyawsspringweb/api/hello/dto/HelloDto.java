@@ -1,4 +1,4 @@
-package com.woopi.study.wpsdutyawsspringweb.api.hello.dto;
+package com.woopi.study.wpstudyawsspringweb.api.hello.dto;
 
 import lombok.*;
 

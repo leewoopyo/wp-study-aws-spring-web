@@ -1,4 +1,4 @@
-package com.woopi.study.wpsdutyawsspringweb.api.hello.controller;
+package com.woopi.study.wpstudyawsspringweb.api.hello.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;

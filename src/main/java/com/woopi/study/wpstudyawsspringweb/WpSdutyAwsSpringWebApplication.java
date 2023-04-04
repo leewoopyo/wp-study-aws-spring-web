@@ -1,4 +1,4 @@
-package com.woopi.study.wpsdutyawsspringweb;
+package com.woopi.study.wpstudyawsspringweb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
