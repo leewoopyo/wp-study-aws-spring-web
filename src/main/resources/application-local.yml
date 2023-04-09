@@ -3,8 +3,9 @@
 database: h2db
 spring:
   datasource:
-    url: jdbc:h2:mem:testdb
-    #url: jdbc:h2:file:./target/h2db/db/application;DB_CLOSE_DELAY=-1
+    url: jdbc:h2:mem:testdb;MODE=MySQL
+    # url: jdbc:h2:mem:testdb;MODE=MSSQLServer
+    # url: jdbc:h2:file:./target/h2db/db/application;DB_CLOSE_DELAY=-1
     driver-class-name: org.h2.Driver
     username: stamp
     password:
@@ -19,10 +20,11 @@ spring:
       data-locations: classpath*:initdata/${database}/data.sql
       #schema-locations: classpath*:initdata/h2db/schema.sql
       #data-locations: classpath*:initdata/h2db/data.sql
-      mode: embedded
+      mode: never
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: create
     #jpa 사용 환경에서 data.sql을 정상적으로 동작하게 하는 옵션
-    defer-datasource-initialization: true
+    defer-datasource-initialization: false
+    show-sql: true
