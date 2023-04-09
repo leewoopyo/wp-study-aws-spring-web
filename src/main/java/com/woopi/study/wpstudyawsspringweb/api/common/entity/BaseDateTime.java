@@ -1,4 +1,4 @@
-package com.woopi.study.wpstudyawsspringweb.api.common;
+package com.woopi.study.wpstudyawsspringweb.api.common.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
