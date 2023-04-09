@@ -1,0 +1,10 @@
+INSERT INTO tb_sample (id, name) values (1, 'sample1');
+INSERT INTO tb_sample (id, name) values (2, 'sample2');
+INSERT INTO tb_sample (id, name) values (3, 'sample3');
+INSERT INTO tb_sample (id, name) values (4, 'sample4');
+INSERT INTO tb_sample (id, name) values (5, 'sample5');
+INSERT INTO tb_sample (id, name) values (6, 'sample6');
+INSERT INTO tb_sample (id, name) values (7, 'sample7');
+INSERT INTO tb_sample (id, name) values (8, 'sample8');
+INSERT INTO tb_sample (id, name) values (9, 'sample9');
+INSERT INTO tb_sample (id, name) values (10, 'sample10');

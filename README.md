@@ -16,7 +16,6 @@
 테스트 후엔 master에 Pull Request를 진행한다.
 
 
-
     ### 1. master
     ### 2. release
     ### 3. test
@@ -26,11 +25,20 @@
 
 
 ## # profile
+어플리케이션 설정 정보는 git flow에 따른 4개의 소스 구분 + local을 하려고 했으나,
+
+개인 프로젝트이기때문에 local, dev, prod 3개만 두기로 한다.
+
+
     ### 1. prod
     ### 2. stg
     ### 3. test
     ### 4. dev
     ### 5. local
 
+
+## # JAVA 표준 ORM (JPA) 사용
+
+## # DB는 H2DB 사용
 
 
