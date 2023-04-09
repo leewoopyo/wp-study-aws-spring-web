@@ -1,14 +1,11 @@
 package com.woopi.study.wpstudyawsspringweb.api.posts.entity;
 
-import com.woopi.study.wpstudyawsspringweb.api.common.BaseDatetimeExtended;
-import io.swagger.annotations.ApiModelProperty;
+import com.woopi.study.wpstudyawsspringweb.api.common.entity.BaseDatetimeExtended;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import lombok.extern.apachecommons.CommonsLog;
 import org.hibernate.annotations.Comment;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
