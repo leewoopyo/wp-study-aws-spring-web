@@ -3,6 +3,7 @@ package com.woopi.study.wpstudyawsspringweb.api.common.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -16,6 +17,7 @@ import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
 @Getter
+@SuperBuilder
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
@@ -26,32 +28,34 @@ public class BaseDateTime {
      */
     @CreatedBy
     @Setter
-    @Column(name = "CREATED_BY", updatable = false, length = 36, columnDefinition = "VARCHAR(36) COMMENT '생성자'")
+    @Comment("생성자")
+    @Column(name = "CREATED_BY", updatable = false, length = 36)
     protected String createdBy;
 
     /**
      * 생성 년월일시분초 : Asia/Seoul TimeZone LocalDateTime
      */
+    //@CreatedDate
     @CreationTimestamp
-//    @CreatedDate
     @Comment("생성 일시")
-    @Column(name = "CREATED_AT", nullable = false, updatable = false, columnDefinition = "DATETIME(6) DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "CREATED_AT", nullable = false, updatable = false)
     protected LocalDateTime createdAt;
 
     /**
      * 갱신한 사용자 : UserID
      */
     @LastModifiedBy
-    @Column(name = "UPDATED_BY", length = 36, insertable = false, columnDefinition = "VARCHAR(36) COMMENT '수정자'")
+    @Comment("수정자")
+    @Column(name = "UPDATED_BY", length = 36, insertable = false)
     protected String updatedBy;
 
     /**
      * 갱신 년월일시분초
      */
+    //@LastModifiedDate
     @UpdateTimestamp
-//    @LastModifiedDate
     @Comment("수정 일시")
-    @Column(name = "UPDATED_AT", nullable = true, insertable = false, columnDefinition = "DATETIME(6) DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP")
+    @Column(name = "UPDATED_AT")
     protected LocalDateTime updatedAt;
 
 }
