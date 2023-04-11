@@ -39,7 +39,6 @@ public class PostsControllerTest {
     @Test
     public void postsSave () {
         //given
-        String url = "http://localhost:" + port + "/api/v1/posts";
         String title = "제목1";
         String content = "내용1";
         String author = "글쓴이1";
@@ -48,6 +47,8 @@ public class PostsControllerTest {
                                                     .content(content)
                                                     .author(author)
                                                     .build();
+
+        String url = "http://localhost:" + port + "/api/v1/posts";
         HttpEntity<PostsDto.SaveRequest> requestEntity = new HttpEntity<>(saveRequest, new HttpHeaders());
         ParameterizedTypeReference<CommonResponse<PostsDto.SaveResponse>> responseType = new ParameterizedTypeReference<CommonResponse<PostsDto.SaveResponse>>() {};
         //when
@@ -69,7 +70,50 @@ public class PostsControllerTest {
                 .orElse(null);
 
         assertThat(resultPosts.getTitle()).isEqualTo(title);
-        assertThat(resultPosts.getAuthor()).isEqualTo(author);
         assertThat(resultPosts.getContent()).isEqualTo(content);
+        assertThat(resultPosts.getAuthor()).isEqualTo(author);
+    }
+
+    @Test
+    public void postsUpdate () {
+        //given
+        Posts savedPosts = postsRepository.save(Posts.builder()
+                                                .title("제목_1")
+                                                .content("내용_1")
+                                                .author("글쓴이_1")
+                                                .build());
+        Long updateId = savedPosts.getId();
+        String expectedTitle = "제목_2";
+        String expectedContent = "내용_2";
+        String expectedAuthor = "글쓴이_2";
+        PostsDto.UpdateRequest udpateRequest = PostsDto.UpdateRequest.builder()
+                                                                        .title(expectedTitle)
+                                                                        .content(expectedContent)
+                                                                        .author(expectedAuthor)
+                                                                        .build();
+
+        String url = "http://localhost:" + port + "/api/v1/posts/" + updateId;
+        HttpEntity<PostsDto.UpdateRequest> requestEntity = new HttpEntity<>(udpateRequest, new HttpHeaders());
+        ParameterizedTypeReference<CommonResponse<PostsDto.UpdateRequest>> responseType = new ParameterizedTypeReference<CommonResponse<PostsDto.UpdateRequest>>() {};
+
+        //when
+        ResponseEntity<CommonResponse<PostsDto.UpdateRequest>> responseEntity = testRestTemplate.exchange(
+                url,
+                HttpMethod.PUT,
+                requestEntity,
+                responseType
+        );
+
+        //then
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(responseEntity.getBody().getStatusCode()).isEqualTo(StatusCode.SUCCESS);
+
+        Posts resultPosts = postsRepository.findAll().stream()
+                .max(Comparator.comparing(Posts::getId))
+                .orElse(null);
+
+        assertThat(resultPosts.getTitle()).isEqualTo(expectedTitle);
+        assertThat(resultPosts.getContent()).isEqualTo(expectedContent);
+        assertThat(resultPosts.getAuthor()).isEqualTo(expectedAuthor);
     }
 }

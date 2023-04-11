@@ -16,7 +16,6 @@ public class HelloDtoTest {
         String name = "test";
         int amount = 1000;
 
-
         //when(실행)
         /**
          * builder 패턴
@@ -26,12 +25,9 @@ public class HelloDtoTest {
                                                                 .name(name)
                                                                 .amount(amount)
                                                                 .build();
-
         //then(검증)
         assertThat(helloResponseDto.getName()).isEqualTo(name);
         assertThat(helloResponseDto.getAmount()).isEqualTo(amount);
-
-
     }
 
 }

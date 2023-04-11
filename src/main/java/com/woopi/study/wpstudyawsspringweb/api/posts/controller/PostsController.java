@@ -7,9 +7,9 @@ import com.woopi.study.wpstudyawsspringweb.api.posts.service.PostsService;
 import com.woopi.study.wpstudyawsspringweb.enumeration.StatusCode;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.persistence.EntityNotFoundException;
 
 @Api(tags = "Posts")
 @RequiredArgsConstructor
@@ -19,8 +19,9 @@ public class PostsController {
     private final PostsService postsService;
 
     @PostMapping("/api/v1/posts")
-    public CommonResponse<PostsDto.SaveResponse> save (@RequestBody PostsDto.SaveRequest saveRequest) {
-
+    public CommonResponse<PostsDto.SaveResponse> save (
+            @RequestBody PostsDto.SaveRequest saveRequest
+    ) {
         try {
             Posts posts = postsService.save(saveRequest);
             return  CommonResponse.<PostsDto.SaveResponse>builder()
@@ -30,8 +31,52 @@ public class PostsController {
                     .build();
         } catch (Exception e) {
             return CommonResponse.<PostsDto.SaveResponse>builder()
-                                            .statusCode(StatusCode.UNKNOWN_EXCEPTION)
-                                            .build();
+                                    .statusCode(StatusCode.UNKNOWN_EXCEPTION)
+                                    .build();
+        }
+    }
+
+    @PutMapping("/api/v1/posts/{id}")
+    public CommonResponse<PostsDto.UpdateResponse> update (
+        @PathVariable Long id,
+        @RequestBody PostsDto.UpdateRequest updateRequest
+    ) {
+        try {
+            Posts posts = postsService.update(id, updateRequest);
+            return CommonResponse.<PostsDto.UpdateResponse>builder()
+                    .statusCode(StatusCode.SUCCESS)
+                    .message("수정 성공")
+                    .data(PostsDto.UpdateResponse.toDto(posts))
+                    .build();
+        } catch (EntityNotFoundException enfe) {
+            return CommonResponse.<PostsDto.UpdateResponse>builder()
+                    .statusCode(StatusCode.USER_INFO_NOT_FOUND)
+                    .build();
+        } catch (Exception e) {
+            return CommonResponse.<PostsDto.UpdateResponse>builder()
+                    .statusCode(StatusCode.UNKNOWN_EXCEPTION)
+                    .build();
+        }
+    }
+
+    @GetMapping("/api/v1/posts/{id}")
+    public CommonResponse<PostsDto.GetResponse> findById (
+            @PathVariable Long id
+    ) {
+        try {
+            PostsDto.GetResponse response = postsService.findById(id);
+            return CommonResponse.<PostsDto.GetResponse>builder()
+                    .statusCode(StatusCode.SUCCESS)
+                    .data(response)
+                    .build();
+        } catch (EntityNotFoundException enfe) {
+            return CommonResponse.<PostsDto.GetResponse>builder()
+                    .statusCode(StatusCode.USER_INFO_NOT_FOUND)
+                    .build();
+        } catch (Exception e) {
+            return CommonResponse.<PostsDto.GetResponse>builder()
+                    .statusCode(StatusCode.UNKNOWN_EXCEPTION)
+                    .build();
         }
     }
 }

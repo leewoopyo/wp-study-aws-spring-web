@@ -16,7 +16,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Entity
 public class Posts extends BaseDatetimeExtended implements Serializable {
-
+    /* ID를 UUID로 하고자 할 때의 설정 */
     //    @Id
     //    @Column(name = "ID", updatable = false, nullable = false, unique = true, length = 40)
     //    @ApiModelProperty(notes = "ID")
@@ -40,5 +40,10 @@ public class Posts extends BaseDatetimeExtended implements Serializable {
     @Comment("글쓴이")
     private String author;
 
+    public void update (String title, String content, String author) {
+        this.title = title;
+        this.content = content;
+        this.author = author;
+    }
 
 }
