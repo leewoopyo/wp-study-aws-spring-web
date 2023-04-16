@@ -1,18 +1,42 @@
 package com.woopi.study.wpstudyawsspringweb.web.controller;
 
+import com.woopi.study.wpstudyawsspringweb.api.posts.service.PostsService;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+@RequiredArgsConstructor
 @Controller
 public class WebController {
+
+    private final PostsService postsService;
+
+    /**
+     * 스웨거
+     */
     @GetMapping("/swagger-ui")
     public String swagger() {
         return "redirect:/swagger-ui/index.html";
     }
 
+    /**
+     * 메인페이지, 게시글 조회
+     */
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+
+        model.addAttribute("posts", postsService.findAllByDesc());
         return "index";
+    }
+
+    /**
+     * 게시글등록
+     */
+    @GetMapping("/posts/save")
+    public String postsSave() {
+        return "posts/posts-save";
     }
 
 }
