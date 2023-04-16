@@ -3,6 +3,7 @@ package com.woopi.study.wpstudyawsspringweb.api.posts.dto;
 import com.woopi.study.wpstudyawsspringweb.api.posts.entity.Posts;
 import io.swagger.annotations.ApiParam;
 import lombok.*;
+import org.springframework.util.ObjectUtils;
 
 public class PostsDto {
 
@@ -130,6 +131,8 @@ public class PostsDto {
         private String content;
         @ApiParam(value = "글쓴이")
         private String author;
+        @ApiParam(value = "수정일자")
+        private String modifiedDate;
 
         public static GetResponse toDto (Posts posts) {
             return PostsDto.GetResponse.builder()
@@ -137,6 +140,7 @@ public class PostsDto {
                     .title(posts.getTitle())
                     .content(posts.getContent())
                     .author(posts.getAuthor())
+                    .modifiedDate(ObjectUtils.isEmpty(posts.getUpdatedAt()) ? posts.getCreatedAt().toString() : posts.getUpdatedAt().toString())
                     .build();
         }
     }

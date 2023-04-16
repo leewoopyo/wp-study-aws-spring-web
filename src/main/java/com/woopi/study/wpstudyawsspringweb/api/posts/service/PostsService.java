@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -51,5 +53,19 @@ public class PostsService {
     public PostsDto.GetResponse findById (Long id) {
         Posts posts = postsRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
         return PostsDto.GetResponse.toDto(posts);
+    }
+
+    /**
+     * Posts 전체 조회 (Sort id Desc)
+     */
+    @Transactional(readOnly = true)
+    public List<PostsDto.GetResponse> findAllByDesc () {
+        List<Posts> postsList = postsRepository.findAllDesc();
+        if (postsList.isEmpty() || postsList.size() <= 0) {throw new EntityNotFoundException();}
+
+        List<PostsDto.GetResponse> postsDtoList = postsList.stream()
+                                                            .map(PostsDto.GetResponse::toDto)
+                                                            .collect(Collectors.toList());
+        return postsDtoList;
     }
 }

@@ -1,4 +1,2 @@
 /* Posts 기초 데이터 추가 */
-INSERT INTO POSTS VALUES(1, true, false, '글쓴이1', '내용1', '제목1');
-INSERT INTO POSTS VALUES(2, true, false, '글쓴이2', '내용2', '제목2');
-INSERT INTO POSTS VALUES(3, true, false, '글쓴이3', '내용3', '제목3');
+INSERT INTO posts (id, created_at, created_by, updated_at, updated_by, is_activated, is_deleted, author, content, title) VALUES (1, '2023-01-01 00:00:00.000000', 'SYSTEM', '2023-01-01 00:00:00.000000', 'SYSTEM', true, false, '글쓴이1', '내용1', '제목1');

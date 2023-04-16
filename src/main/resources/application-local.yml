@@ -20,11 +20,11 @@ spring:
       data-locations: classpath*:initdata/${database}/data.sql
       #schema-locations: classpath*:initdata/h2db/schema.sql
       #data-locations: classpath*:initdata/h2db/data.sql
-      mode: never
+      mode: embedded
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: create
     #jpa 사용 환경에서 data.sql을 정상적으로 동작하게 하는 옵션
-    defer-datasource-initialization: false
+    defer-datasource-initialization: true
     show-sql: true

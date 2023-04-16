@@ -27,7 +27,7 @@ public class Posts extends BaseDatetimeExtended implements Serializable {
     @Id
     @Comment("고유 아이디 값")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Column(length = 500, nullable = false)
     @Comment("제목")
