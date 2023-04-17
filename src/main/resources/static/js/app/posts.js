@@ -37,6 +37,7 @@ const posts = {
     update : function () {
         const data = {
             title: $('#title').val(),
+            author: $('#author').val(),
             content: $('#content').val()
         };
 

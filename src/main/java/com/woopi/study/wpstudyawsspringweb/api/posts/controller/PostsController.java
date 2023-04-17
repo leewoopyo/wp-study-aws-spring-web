@@ -32,6 +32,7 @@ public class PostsController {
         } catch (Exception e) {
             return CommonResponse.<PostsDto.SaveResponse>builder()
                                     .statusCode(StatusCode.UNKNOWN_EXCEPTION)
+                                    .message(e.getMessage())
                                     .build();
         }
     }
@@ -55,6 +56,7 @@ public class PostsController {
         } catch (Exception e) {
             return CommonResponse.<PostsDto.UpdateResponse>builder()
                     .statusCode(StatusCode.UNKNOWN_EXCEPTION)
+                    .message(e.getMessage())
                     .build();
         }
     }
@@ -76,6 +78,29 @@ public class PostsController {
         } catch (Exception e) {
             return CommonResponse.<PostsDto.GetResponse>builder()
                     .statusCode(StatusCode.UNKNOWN_EXCEPTION)
+                    .message(e.getMessage())
+                    .build();
+        }
+    }
+
+    @DeleteMapping("/api/v1/posts/{id}")
+    public CommonResponse delete (
+            @PathVariable Long id
+    ) {
+        try {
+            postsService.delete(id);
+            return CommonResponse.builder()
+                    .statusCode(StatusCode.SUCCESS)
+                    .message("삭제 성공")
+                    .build();
+        } catch (EntityNotFoundException enfe) {
+            return CommonResponse.builder()
+                    .statusCode(StatusCode.USER_INFO_NOT_FOUND)
+                    .build();
+        } catch (Exception e) {
+            return CommonResponse.builder()
+                    .statusCode(StatusCode.UNKNOWN_EXCEPTION)
+                    .message(e.getMessage())
                     .build();
         }
     }

@@ -61,11 +61,22 @@ public class PostsService {
     @Transactional(readOnly = true)
     public List<PostsDto.GetResponse> findAllByDesc () {
         List<Posts> postsList = postsRepository.findAllDesc();
-        if (postsList.isEmpty() || postsList.size() <= 0) {throw new EntityNotFoundException();}
+        if (postsList.isEmpty() || postsList.size() <= 0) {
+            return null;
+        }
 
         List<PostsDto.GetResponse> postsDtoList = postsList.stream()
                                                             .map(PostsDto.GetResponse::toDto)
                                                             .collect(Collectors.toList());
         return postsDtoList;
+    }
+
+    /**
+     * Posts 삭제
+     */
+    @Transactional
+    public void delete (Long id) {
+        Posts posts = postsRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
+        postsRepository.delete(posts);
     }
 }
